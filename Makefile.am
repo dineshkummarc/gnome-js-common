@@ -1,4 +1,4 @@
-SUBDIRS = po
+SUBDIRS = po modules
 
 gnome_js_commondocdir = ${prefix}/doc/gnome_js_common
 gnome_js_commondoc_DATA = \

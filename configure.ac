@@ -48,6 +48,8 @@ fi
 AC_OUTPUT([
 Makefile
 po/Makefile.in
+modules/Makefile
+modules/tweener/Makefile
 ])
 
 echo "
