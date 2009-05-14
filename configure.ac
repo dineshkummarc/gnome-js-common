@@ -45,6 +45,9 @@ if test x"$want_gjs" == x"yes" ; then
    AC_SUBST(GJS_LDFLAGS)
 fi
 
+AM_CONDITIONAL(HAVE_SEED, test "x$want_seed" = "xyes")
+AM_CONDITIONAL(HAVE_GJS, test "x$want_gjs" = "xyes")
+
 AC_OUTPUT([
 Makefile
 po/Makefile.in
