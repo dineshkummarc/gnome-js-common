@@ -23,8 +23,35 @@ IT_PROG_INTLTOOL([0.35.0])
 
 AM_PROG_LIBTOOL
 
+AC_ARG_ENABLE(seed,
+	AC_HELP_STRING([--enable-seed],
+	[enable building and testing of Seed. [default=yes]]),
+	[want_seed=$enableval],[want_seed="yes"])
+
+if test x"$want_seed" == x"yes" ; then
+   PKG_CHECK_MODULES(SEED, seed)
+   AC_SUBST(SEED_CFLAGS)
+   AC_SUBST(SEED_LDFLAGS)
+fi
+
+AC_ARG_ENABLE(gjs,
+	AC_HELP_STRING([--enable-gjs],
+	[enable building and testing of gjs. [default=yes]]),
+	[want_gjs=$enableval],[want_gjs="yes"])
+
+if test x"$want_gjs" == x"yes" ; then
+   PKG_CHECK_MODULES(GJS, gjs-1.0)
+   AC_SUBST(GJS_CFLAGS)
+   AC_SUBST(GJS_LDFLAGS)
+fi
+
 AC_OUTPUT([
 Makefile
-src/Makefile
 po/Makefile.in
 ])
+
+echo "
+Configured Engines:
+   Seed......................$want_seed
+   gjs.......................$want_gjs
+"
