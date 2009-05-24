@@ -53,6 +53,7 @@ Makefile
 po/Makefile.in
 modules/Makefile
 modules/tweener/Makefile
+gnome-js-common.pc
 ])
 
 echo "

@@ -1,0 +1,9 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+bindir=@bindir@
+includedir=@includedir@
+
+Name: GNOME JS Common
+Description: Common modules for GNOME JavaScript bindings.
+Version: @VERSION@

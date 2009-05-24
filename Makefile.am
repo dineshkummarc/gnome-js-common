@@ -22,6 +22,8 @@ DISTCLEANFILES = intltool-extract \
 	intltool-update \
 	po/.intltool-merge-cache
 
+pkgconfig_DATA = gnome-js-common.pc
+pkgconfigdir = $(libdir)/pkgconfig
 
 # Remove doc directory on uninstall
 uninstall-local:
