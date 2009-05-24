@@ -3,6 +3,7 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 bindir=@bindir@
 includedir=@includedir@
+moduledir=@libdir@/gnome-js
 
 Name: GNOME JS Common
 Description: Common modules for GNOME JavaScript bindings.
