@@ -12,9 +12,12 @@
  * This file defines some higher-order methods and functions for
  * functional and function-level programming.
  */
-window = this;
+
+// rhino compatibility
+typeof window == 'undefined' && (window = this);
+
 /// `Functional` is the namespace for higher-order functions.
-var Functional = this;
+var Functional = window || {};
 
 /**
  * This function copies all the public functions in `Functional` except itself
