@@ -5,4 +5,5 @@ module_DATA= \
 	lang.js \
 	signals.js \
 	JSON.js \
-	functional.js 
+	functional.js \
+	ArrayUtils.js 
