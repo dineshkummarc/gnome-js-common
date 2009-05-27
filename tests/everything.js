@@ -1,5 +1,3 @@
-#!/usr/bin/env seed
-
 Everything = imports.gi.Everything;
 GObject = imports.gi.GObject;
 

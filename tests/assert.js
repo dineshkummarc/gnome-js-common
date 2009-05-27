@@ -1,5 +1,3 @@
-#!/usr/bin/env seed
-
 var flag = 0;
 
 try
