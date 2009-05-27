@@ -20,7 +20,7 @@ SeedValue js_assert(SeedContext ctx,
 		seed_make_exception(ctx, exception, "AssertionError", "Assertion failed");
 }
 
-void test_exec(gchar * filename)
+gboolean test_exec(gchar * filename)
 {
 	SeedObject global;
 	SeedScript * script;
@@ -52,15 +52,16 @@ void test_exec(gchar * filename)
 	
 	if((e = seed_script_exception(script)))
 	{
-		g_critical("FAIL\n\t%s. %s in %s at line %d\n",
-			seed_exception_get_name (eng->context, e),
-			seed_exception_get_message (eng->context, e),
-			seed_exception_get_file (eng->context, e),
-			seed_exception_get_line (eng->context, e));
-		exit(1);
+		printf("%s... FAIL (%s: line %d)\n",
+			filename,
+			seed_exception_get_name(eng->context, e),
+			seed_exception_get_line(eng->context, e));
+		return FALSE;
 	}
 
 	g_free(script);
+	
+	return TRUE;
 }
 
 void run_tests(gchar * tests_dir_name)
@@ -77,8 +78,8 @@ void run_tests(gchar * tests_dir_name)
 		
 		test_path = g_build_filename(tests_dir_name, test_name, NULL);
 
-		test_exec((char*)test_path);
-		printf("%s... OK\n", test_path);
+		if(test_exec((char*)test_path))
+			printf("%s... OK\n", test_path);
 	}
 	
 }

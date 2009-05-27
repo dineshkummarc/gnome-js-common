@@ -1,14 +1,13 @@
-SUBDIRS = po modules
+SUBDIRS = po modules tests
 
 gnome_js_commondocdir = ${prefix}/doc/gnome_js_common
 gnome_js_commondoc_DATA = \
-	README\
-	COPYING\
-	AUTHORS\
-	ChangeLog\
-	INSTALL\
+	README \
+	COPYING \
+	AUTHORS \
+	ChangeLog \
+	INSTALL \
 	NEWS
-
 
 INTLTOOL_FILES = intltool-extract.in \
 	intltool-merge.in \
