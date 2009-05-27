@@ -40,7 +40,7 @@ AC_ARG_ENABLE(gjs,
 	[want_gjs=$enableval],[want_gjs="yes"])
 
 if test x"$want_gjs" == x"yes" ; then
-   PKG_CHECK_MODULES(GJS, gjs-1.0)
+   PKG_CHECK_MODULES(GJS, gjs-1.0 gjs-gi-1.0)
    AC_SUBST(GJS_CFLAGS)
    AC_SUBST(GJS_LDFLAGS)
 fi
