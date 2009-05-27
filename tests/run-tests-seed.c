@@ -8,6 +8,7 @@
 #include <stdio.h>
 
 SeedEngine * eng;
+gboolean failure_flag = FALSE;
 
 SeedValue js_assert(SeedContext ctx,
                     SeedObject function,
@@ -56,6 +57,9 @@ gboolean test_exec(gchar * filename)
 			filename,
 			seed_exception_get_name(eng->context, e),
 			seed_exception_get_line(eng->context, e));
+		
+		failure_flag = TRUE;
+		
 		return FALSE;
 	}
 
@@ -98,6 +102,6 @@ int main(int argc, char ** argv)
 			run_tests(argv[i]);
 	}
 	
-	return 0;
+	return failure_flag;
 }
 

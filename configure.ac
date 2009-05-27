@@ -8,7 +8,7 @@ AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
-
+AM_PROG_CC_C_O
 
 
 
@@ -53,6 +53,7 @@ Makefile
 po/Makefile.in
 modules/Makefile
 modules/tweener/Makefile
+tests/Makefile
 gnome-js-common.pc
 ])
 
