@@ -89,10 +89,13 @@ int main(int argc, char ** argv)
 	
 	if(argc == 1)
 		run_tests(".");
-	else if(argc == 2)
-		run_tests(argv[1]);
 	else
-		printf("Doin' it wrong.\n");
+	{
+		int i;
+		
+		for(i = 1; i < argc; i++)
+			run_tests(argv[i]);
+	}
 	
 	return 0;
 }
