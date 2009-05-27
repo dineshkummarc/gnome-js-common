@@ -24,7 +24,7 @@ assert(test_ssize(12) == 12);
 assert(test_size(143) == 143);
 assert(test_float(-1853.5) == -1853.5);
 assert(test_double(-134543853.12334) == -134543853.12334);
-//assert(test_timet(1853) == 1853);
+assert(test_timet(1853).getTime() == 1853*1000);
 assert(test_gtype(8) == 8);
 
 var filenames = test_filename_return(); 

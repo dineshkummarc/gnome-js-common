@@ -48,6 +48,9 @@ fi
 AM_CONDITIONAL(HAVE_SEED, test "x$want_seed" = "xyes")
 AM_CONDITIONAL(HAVE_GJS, test "x$want_gjs" = "xyes")
 
+AC_SUBST(HAVE_SEED)
+AC_SUBST(HAVE_GJS)
+
 AC_OUTPUT([
 Makefile
 po/Makefile.in
