@@ -1,21 +1,9 @@
-var flag = 0;
+assert = function(val){
+    AssertionError = function(string){
+	this.name = "AssertionError"
+	this.message = string;
+    }
 
-try
-{
-	assert(1 == 2);
+    if (!val)
+	throw new AssertionError("Assertion failed");
 }
-catch(e)
-{
-	flag++;
-}
-
-try
-{
-	assert(0);
-}
-catch(e)
-{
-	flag++;
-}
-
-assert(flag == 2);

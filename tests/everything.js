@@ -3,6 +3,8 @@ GObject = imports.gi.GObject;
 
 JSON = imports.JSON;
 
+assert = imports.assert.assert
+
 with(Everything)
 {
 assert(test_boolean(true) == true);

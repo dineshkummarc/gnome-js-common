@@ -10,64 +10,51 @@
 SeedEngine * eng = NULL;
 extern gboolean failure_flag;
 
-SeedValue js_assert(SeedContext ctx,
-                    SeedObject function,
-                    SeedObject this_object,
-                    size_t argument_count,
-                    const SeedValue arguments[],
-                    SeedException * exception)
-{
-	if(!seed_value_to_boolean(ctx, arguments[0], NULL))
-		seed_make_exception(ctx, exception, "AssertionError", "Assertion failed");
-}
-
 gboolean test_exec(gchar * filename)
 {
-	SeedObject global;
-	SeedScript * script;
-	SeedException e;
-	gchar * buffer;
+  SeedObject global;
+  SeedScript * script;
+  SeedException e;
+  gchar * buffer;
 	
-	if(!eng)
-		eng = seed_init(NULL, NULL);
+  if(!eng)
+    eng = seed_init(NULL, NULL);
 
-	g_file_get_contents(filename, &buffer, 0, 0);
+  g_file_get_contents(filename, &buffer, 0, 0);
 
-	if(!buffer)
-	{
-		g_critical("File %s not found!", filename);
-		exit(1);
-	}
+  if(!buffer)
+    {
+      g_critical("File %s not found!", filename);
+      exit(1);
+    }
 
-	if(*buffer == '#')
-	{
-		while(*buffer != '\n')
-			buffer++;
-		buffer++;
-	}
+  if(*buffer == '#')
+    {
+      while(*buffer != '\n')
+	buffer++;
+      buffer++;
+    }
 
-	script = seed_make_script(eng->context, buffer, filename, 1);
-	global = seed_context_get_global_object(eng->context);
-	seed_importer_add_global(global, filename);
+  script = seed_make_script(eng->context, buffer, filename, 1);
+  global = seed_context_get_global_object(eng->context);
+  seed_importer_add_global(global, filename);
 	
-	seed_create_function(eng->context, "assert", js_assert, global);
-
-	seed_evaluate(eng->context, script, 0);
+  seed_evaluate(eng->context, script, 0);
 	
-	if((e = seed_script_exception(script)))
-	{
-		printf("%s... FAIL (%s: line %d)\n",
-			filename,
-			seed_exception_get_name(eng->context, e),
-			seed_exception_get_line(eng->context, e));
+  if((e = seed_script_exception(script)))
+    {
+      printf("%s... FAIL (%s: line %d)\n",
+	     filename,
+	     seed_exception_get_name(eng->context, e),
+	     seed_exception_get_line(eng->context, e));
 		
-		failure_flag = TRUE;
+      failure_flag = TRUE;
 		
-		return FALSE;
-	}
+      return FALSE;
+    }
 
-	g_free(script);
+  g_free(script);
 	
-	return TRUE;
+  return TRUE;
 }
 
