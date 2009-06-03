@@ -4,3 +4,4 @@ tweener_DATA= \
 	tweener.js \
 	tweenList.js
 
+EXTRA_DIST= equations.js tweener.js tweenList.js
