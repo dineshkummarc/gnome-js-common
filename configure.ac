@@ -10,11 +10,10 @@ AM_PROG_CC_STDC
 AC_HEADER_STDC
 AM_PROG_CC_C_O
 
-
-
 dnl ***************************************************************************
-dnl Internatinalization
+dnl Internationalization
 dnl ***************************************************************************
+
 GETTEXT_PACKAGE=gnome_js_common
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
@@ -29,9 +28,15 @@ AC_ARG_ENABLE(seed,
 	[want_seed=$enableval],[want_seed="yes"])
 
 if test x"$want_seed" == x"yes" ; then
-   PKG_CHECK_MODULES(SEED, seed)
-   AC_SUBST(SEED_CFLAGS)
-   AC_SUBST(SEED_LDFLAGS)
+   PKG_CHECK_EXISTS(seed, have_seed=yes, have_seed=no)
+
+   if test x"$have_seed" == x"yes" ; then
+      PKG_CHECK_MODULES(SEED, seed)
+      AC_SUBST(SEED_CFLAGS)
+      AC_SUBST(SEED_LDFLAGS)
+   fi
+else
+   have_seed=no
 fi
 
 AC_ARG_ENABLE(gjs,
@@ -40,13 +45,19 @@ AC_ARG_ENABLE(gjs,
 	[want_gjs=$enableval],[want_gjs="yes"])
 
 if test x"$want_gjs" == x"yes" ; then
-   PKG_CHECK_MODULES(GJS, gjs-1.0 gjs-gi-1.0)
-   AC_SUBST(GJS_CFLAGS)
-   AC_SUBST(GJS_LDFLAGS)
+   PKG_CHECK_EXISTS(gjs-gi-1.0, have_gjs=yes, have_gjs=no)
+
+   if test x"$have_gjs" == x"yes" ; then
+      PKG_CHECK_MODULES(GJS, gjs-1.0 gjs-gi-1.0)
+      AC_SUBST(GJS_CFLAGS)
+      AC_SUBST(GJS_LDFLAGS)
+   fi
+else
+   have_gjs=no
 fi
 
-AM_CONDITIONAL(HAVE_SEED, test "x$want_seed" = "xyes")
-AM_CONDITIONAL(HAVE_GJS, test "x$want_gjs" = "xyes")
+AM_CONDITIONAL(HAVE_SEED, test "x$have_seed" = "xyes")
+AM_CONDITIONAL(HAVE_GJS, test "x$have_gjs" = "xyes")
 
 AC_SUBST(HAVE_SEED)
 AC_SUBST(HAVE_GJS)
@@ -61,7 +72,7 @@ gnome-js-common.pc
 ])
 
 echo "
-Configured Engines:
-   Seed......................$want_seed
-   gjs.......................$want_gjs
+Tests:
+   Seed.........$have_seed
+   gjs..........$have_gjs
 "
