@@ -1,2 +1,6 @@
+== gnome-js-common 0.1.1 (2009.07.10) ==
 
+* Contains tweener, which provides transitions with advanced easing modes
+
+* Only build test components if seed/gjs are installed
 
