@@ -1,6 +1,6 @@
 SUBDIRS = po modules tests
 
-gnome_js_commondocdir = ${prefix}/doc/gnome_js_common
+gnome_js_commondocdir = ${prefix}/share/doc/gnome_js_common
 gnome_js_commondoc_DATA = \
 	README \
 	COPYING \
