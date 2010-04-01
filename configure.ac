@@ -1,14 +1,18 @@
-AC_INIT(gnome-js-common, 0.1.1)
+AC_INIT([gnome-js-common],[0.1.1])
 
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS([config.h])
-AM_MAINTAINER_MODE
+AC_CONFIG_MACRO_DIR([m4])
 
-AC_ISC_POSIX
+AM_INIT_AUTOMAKE([1.10])
+AM_MAINTAINER_MODE([enable])
+
+# Check for programs
 AC_PROG_CC
-AM_PROG_CC_STDC
-AC_HEADER_STDC
 AM_PROG_CC_C_O
+
+# Initialize libtool
+LT_PREREQ([2.2])
+LT_INIT
 
 dnl ***************************************************************************
 dnl Internationalization
@@ -18,13 +22,11 @@ GETTEXT_PACKAGE=gnome_js_common
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [GETTEXT package name])
 AM_GLIB_GNU_GETTEXT
-IT_PROG_INTLTOOL([0.35.0])
+IT_PROG_INTLTOOL([0.40.4])
 
-AM_PROG_LIBTOOL
 
 AC_ARG_ENABLE(seed,
-	AC_HELP_STRING([--enable-seed],
-	[enable building and testing of Seed. [default=yes]]),
+	AS_HELP_STRING([--enable-seed],[enable building and testing of Seed. [default=yes]]),
 	[want_seed=$enableval],[want_seed="yes"])
 
 if test x"$want_seed" == x"yes" ; then
@@ -40,8 +42,7 @@ else
 fi
 
 AC_ARG_ENABLE(gjs,
-	AC_HELP_STRING([--enable-gjs],
-	[enable building and testing of gjs. [default=yes]]),
+	AS_HELP_STRING([--enable-gjs],[enable building and testing of gjs. [default=yes]]),
 	[want_gjs=$enableval],[want_gjs="yes"])
 
 if test x"$want_gjs" == x"yes" ; then
@@ -62,7 +63,7 @@ AM_CONDITIONAL(HAVE_GJS, test "x$have_gjs" = "xyes")
 AC_SUBST(HAVE_SEED)
 AC_SUBST(HAVE_GJS)
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
 modules/Makefile
@@ -70,6 +71,7 @@ modules/tweener/Makefile
 tests/Makefile
 gnome-js-common.pc
 ])
+AC_OUTPUT
 
 echo "
 Tests:

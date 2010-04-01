@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+
 SUBDIRS = po modules tests
 
 gnome_js_commondocdir = ${prefix}/share/doc/gnome_js_common
