@@ -1,3 +1,4 @@
+/* Taken from MDC examples available under MIT license */
 if (!Array.prototype.filter){
 	Array.prototype.filter = function(fun){
 	    var len = this.length >>> 0;
